@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>css 3D</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/1.5.2/raphael-min.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body>
+
+
+    <div class="wrapper">
+        <div class="gallery">
+            <ul class="reset">
+                <li>
+                    <img src="img/01.jpg" alt="">
+                </li>
+                <li>
+                    <img src="img/02.jpg" alt="">
+                </li>
+                <li>
+                    <img src="img/03.jpg" alt="">
+                </li>
+                <li>
+                    <img src="img/04.jpg" alt="">
+                </li>
+                <li>
+                    <img src="img/05.jpg" alt="">
+                </li>
+                <li>
+                    <img src="img/06.jpg" alt="">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+
+        $(function () {
+            var li = $('.gallery').find('li');
+            li.each(function (i) {
+                debugger
+                var t = $(this),
+                    img = t.find('img'),
+                    src = img.attr('src'),
+                    width = li.width(),
+                    height = li.height();
+
+                img.hide().after($('<div />').attr('id', 'holder' + i).addClass('holder'))
+                var r = Raphael('holder' + i, width * 2, height * 2),
+                    rimg = r.image(src, width / 2, height / 2, width, height);
+
+                rimg.hover(function (event) {
+                    this.animate({
+                        scale: 2,
+                        rotaton: 359
+                    }, 1200, 'elastic');
+                }, function () {
+                    this.animate({
+                        scale: 1,
+                        rotation: 0
+                    }, 1200, 'elastic');
+
+                });
+            })
+            // li.hover(function () {
+            //     // li.css({ 'z-index': 1 });
+            //     $(this).css({ 'z-index': 2 });
+            // })
+        })
+
+    </script>
+</body>
+
+</html>
